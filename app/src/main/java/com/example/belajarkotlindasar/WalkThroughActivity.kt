@@ -7,6 +7,7 @@ import android.text.Html
 import android.widget.TextView
 import androidx.viewpager.widget.ViewPager
 import com.example.belajarkotlindasar.adapter.WalkThroughAdapter
+import com.example.belajarkotlindasar.util.SharedPreferences
 import kotlinx.android.synthetic.main.activity_walk_through.*
 
 class WalkThroughActivity : AppCompatActivity() {
@@ -14,11 +15,13 @@ class WalkThroughActivity : AppCompatActivity() {
     lateinit var wkAdapter: WalkThroughAdapter
     val dots = arrayOfNulls<TextView>(3)
     var currentPage: Int = 0
+    lateinit var pre: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_walk_through)
 
+        pre = SharedPreferences(this)
         wkAdapter = WalkThroughAdapter(this)
         vvWalkThrough.adapter = wkAdapter
 
@@ -52,6 +55,7 @@ class WalkThroughActivity : AppCompatActivity() {
             if (vvWalkThrough.currentItem + 1 < dots.size) {
                 vvWalkThrough.currentItem +=1
             } else {
+                pre.firstInstall = true
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
@@ -59,6 +63,7 @@ class WalkThroughActivity : AppCompatActivity() {
         }
 
         tvLewati.setOnClickListener {
+            pre.firstInstall = true
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
