@@ -21,7 +21,7 @@ class SplashActivity : AppCompatActivity() {
             if (pre.firstInstall == false){
                 i = Intent(this, WalkThroughActivity::class.java)
             } else{
-                i = Intent(this, MainActivity::class.java)
+                i = Intent(this, activity_home::class.java)
             }
 
             startActivity(i)
