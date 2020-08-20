@@ -39,4 +39,5 @@ class activity_home : AppCompatActivity() {
 
         true
     }
+    
 }
