@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeFragment"
-    android:background="@color/colorYellow"
-    android:orientation="vertical">
+    android:background="@color/colorWhite">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_Item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/item_view"
+        android:orientation="horizontal"/>
 
     <Button
         android:id="@+id/btn_ad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@id/btn_toast"
         android:text="alert dialog"/>
 
     <Button
         android:id="@+id/btn_toast"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="alert dialog"/>
+        android:layout_alignParentBottom="true"
+        android:text="toast"/>
 
-</LinearLayout>
+</RelativeLayout>
