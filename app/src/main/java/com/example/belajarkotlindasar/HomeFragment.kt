@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.belajarkotlindasar.adapter.ItemAdapter
+import com.example.belajarkotlindasar.listener.OnItemClickListener
 import com.example.belajarkotlindasar.model.Item
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -32,6 +33,8 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
+
+        detail()
 
         action()
     }
@@ -76,6 +79,18 @@ class HomeFragment : Fragment() {
             Toast.makeText(activity, "Ini Toast", Toast.LENGTH_LONG).show()
         }
         }
+
+    fun detail() {
+        itemAdapter.setonClickItemListener(object : OnItemClickListener {
+            override fun onItemClick(item: View, position: Int) {
+                var i = Intent(context, DetailItem::class.java)
+                i.putExtra("title", itemAdapter.getItems().get(position).getTitle() )
+                i.putExtra("description", itemAdapter.getItems().get(position).getDescription())
+                startActivity(i)
+            }
+
+        })
+    }
     }
 
 
