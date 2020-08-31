@@ -2,11 +2,14 @@ package com.example.belajarkotlindasar
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.belajarkotlindasar.adapter.ItemAdapter
 import com.example.belajarkotlindasar.listener.OnItemClickListener
 import com.example.belajarkotlindasar.model.Item
@@ -18,6 +21,7 @@ class ExploreFragment : Fragment() {
     lateinit var itemAdapter: ItemAdapter
     val lm = LinearLayoutManager(activity)
     val addItemList: MutableList<Item> = ArrayList()
+    var isLoading = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,16 +48,6 @@ class ExploreFragment : Fragment() {
 
         addItemList.add(Item("Ini Buku 1", "jdiasdfkasdjnfasdjfnal akdfbaksd aksdjfaksjd aksdfaksjd aksjdfn"))
         addItemList.add(Item("Ini Buku 2", "jdiasdfkasdjnfasdjfnal akdfbaksd aksdjfaksjd aksdfaksjd aksjdfn"))
-        addItemList.add(Item("Ini Buku 3", "jdiasdfkasdjnfasdjfnal akdfbaksd aksdjfaksjd aksdfaksjd aksjdfn"))
-        addItemList.add(Item("Ini Buku 4", "jdiasdfkasdjnfasdjfnal akdfbaksd aksdjfaksjd aksdfaksjd aksjdfn"))
-        addItemList.add(Item("Ini Buku 5", "jdiasdfkasdjnfasdjfnal akdfbaksd aksdjfaksjd aksdfaksjd aksjdfn"))
-        addItemList.add(Item("Ini Buku 6", "jdiasdfkasdjnfasdjfnal akdfbaksd aksdjfaksjd aksdfaksjd aksjdfn"))
-        addItemList.add(Item("Ini Buku 7", "jdiasdfkasdjnfasdjfnal akdfbaksd aksdjfaksjd aksdfaksjd aksjdfn"))
-        addItemList.add(Item("Ini Buku 8", "jdiasdfkasdjnfasdjfnal akdfbaksd aksdjfaksjd aksdfaksjd aksjdfn"))
-        addItemList.add(Item("Ini Buku 9", "jdiasdfkasdjnfasdjfnal akdfbaksd aksdjfaksjd aksdfaksjd aksjdfn"))
-        addItemList.add(Item("Ini Buku 10", "jdiasdfkasdjnfasdjfnal akdfbaksd aksdjfaksjd aksdfaksjd aksjdfn"))
-        addItemList.add(Item("Ini Buku 11", "jdiasdfkasdjnfasdjfnal akdfbaksd aksdjfaksjd aksdfaksjd aksjdfn"))
-
 
         itemAdapter.setItem(addItemList)
     }
@@ -66,10 +60,37 @@ class ExploreFragment : Fragment() {
                 i.putExtra("description", itemAdapter.getItems().get(position).getDescription())
                 startActivity(i)
             }
+        })
 
+        rv_Item.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+
+                if (dy > 0 ) {
+                    var vItem = lm.childCount
+                    var lItem = lm.findFirstCompletelyVisibleItemPosition()
+                    var count = itemAdapter.itemCount
+
+                    if (!isLoading) {
+                        if (vItem + lItem >= count) {
+                            addMoreData()
+                        }
+                    }
+                }
+                super.onScrolled(recyclerView, dx, dy)
+            }
         })
     }
 
-
-
+    fun addMoreData() {
+        isLoading = true
+        pb_progress.visibility = View.VISIBLE
+        for (i in 0..5) {
+            addItemList.add(Item("Ini Buku ke " + i + "", "jdiasdfkasdjnfasdjfnal akdfbaksd aksdjfaksjd aksdfaksjd aksjdfn"))
+        }
+        Handler().postDelayed({
+            isLoading = false
+            pb_progress.visibility = View.GONE
+            itemAdapter.setItem(addItemList)
+        }, 3000)
+    }
 }
