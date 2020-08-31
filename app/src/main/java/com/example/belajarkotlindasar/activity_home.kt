@@ -26,11 +26,14 @@ class activity_home : AppCompatActivity() {
             R.id.menu_home -> {
                 selectedFr = HomeFragment()
             }
-            R.id.menu_location -> {
-                selectedFr = LocationFragment()
+            R.id.menu_explore -> {
+                selectedFr = ExploreFragment()
             }
-            R.id.menu_account -> {
-                selectedFr = AccountFragment()
+            R.id.menu_subsubscriptions -> {
+                selectedFr = SubsubscriptionsFragment()
+            }
+            R.id.menu_librarry -> {
+                selectedFr = LibrarryFragment()
             }
         }
         var fr = supportFragmentManager.beginTransaction()

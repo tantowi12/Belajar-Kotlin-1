@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AccountFragment"
-    android:background="@color/colorAccent">
+    android:background="@color/colorBlueLight"
+    tools:context=".ExploreFragment">
 
-
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_Item"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="fragment account" />
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/item_view"
+        android:orientation="horizontal"/>
 
 </FrameLayout>

@@ -7,13 +7,17 @@
         android:icon="@drawable/ic_home"/>
 
     <item
-        android:id="@+id/menu_location"
-        android:title="@string/location"
-        android:icon="@drawable/ic_location"/>
+        android:id="@+id/menu_explore"
+        android:title="@string/explore"
+        android:icon="@drawable/ic_explore"/>
 
     <item
-        android:id="@+id/menu_account"
-        android:title="@string/account"
-        android:icon="@drawable/ic_account"/>
+        android:id="@+id/menu_subsubscriptions"
+        android:title="@string/subscriptions"
+        android:icon="@drawable/ic_subscriptions"/>
 
+    <item
+        android:id="@+id/menu_librarry"
+        android:title="@string/librarry"
+        android:icon="@drawable/ic_library"/>
 </menu>

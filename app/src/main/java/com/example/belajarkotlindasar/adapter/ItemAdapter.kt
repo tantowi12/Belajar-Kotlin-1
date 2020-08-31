@@ -1,17 +1,12 @@
 package com.example.belajarkotlindasar.adapter
 
 import android.content.Context
-import android.content.Intent
-import android.location.Location
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.belajarkotlindasar.DetailItem
-import com.example.belajarkotlindasar.LocationFragment
 import com.example.belajarkotlindasar.R
 import com.example.belajarkotlindasar.listener.OnItemClickListener
 import com.example.belajarkotlindasar.model.Item

@@ -6,13 +6,6 @@
     tools:context=".HomeFragment"
     android:background="@color/colorWhite">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_Item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/item_view"
-        android:orientation="horizontal"/>
-
     <Button
         android:id="@+id/btn_ad"
         android:layout_width="match_parent"
