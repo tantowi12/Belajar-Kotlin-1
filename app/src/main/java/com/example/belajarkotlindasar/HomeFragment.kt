@@ -1,22 +1,22 @@
 package com.example.belajarkotlindasar
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.belajarkotlindasar.adapter.ItemAdapter
-import com.example.belajarkotlindasar.listener.OnItemClickListener
-import com.example.belajarkotlindasar.model.Item
+import androidx.fragment.app.Fragment
+import com.example.belajarkotlindasar.model.realm.User
+import io.realm.Realm
+import io.realm.exceptions.RealmException
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
+
+    lateinit var realm: Realm
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +28,12 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initView()
         action()
+    }
+
+    fun initView() {
+        realm = Realm.getDefaultInstance()
     }
 
     fun action() {
@@ -48,6 +53,21 @@ class HomeFragment : Fragment() {
 
         btn_toast.setOnClickListener {
             Toast.makeText(activity, "Ini Toast", Toast.LENGTH_LONG).show()
+        }
+
+        btn_add1.setOnClickListener {
+            realm.beginTransaction()
+            try {
+                var user = realm.createObject(User::class.java)
+                user.setNama(et_nama.text.toString())
+                user.setEmail(et_email.text.toString())
+
+                tv_result.text = user.getNama() + "" + user.getEmail()
+
+                realm.commitTransaction()
+            } catch (e: RealmException) {
+                Toast.makeText(activity, e.message, Toast.LENGTH_LONG).show()
+            }
         }
     }
 
