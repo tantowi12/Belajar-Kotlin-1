@@ -56,7 +56,7 @@ class WalkThroughActivity : AppCompatActivity() {
                 vvWalkThrough.currentItem +=1
             } else {
                 pre.firstInstall = true
-                val intent = Intent(this, HomeFragment::class.java)
+                val intent = Intent(this, activity_home::class.java)
                 startActivity(intent)
                 finish()
             }
@@ -64,7 +64,7 @@ class WalkThroughActivity : AppCompatActivity() {
 
         tvLewati.setOnClickListener {
             pre.firstInstall = true
-            val intent = Intent(this, HomeFragment::class.java)
+            val intent = Intent(this, activity_home::class.java)
             startActivity(intent)
             finish()
         }

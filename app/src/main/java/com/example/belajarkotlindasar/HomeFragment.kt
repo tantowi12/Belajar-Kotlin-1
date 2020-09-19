@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.belajarkotlindasar.adapter.UserAdapter
 import com.example.belajarkotlindasar.model.realm.User
 import io.realm.Realm
 import io.realm.exceptions.RealmException
@@ -16,6 +18,8 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
+    lateinit var userAdapter: UserAdapter
+    val  lm = LinearLayoutManager(activity)
     lateinit var realm: Realm
 
     override fun onCreateView(
@@ -32,8 +36,14 @@ class HomeFragment : Fragment() {
         action()
     }
 
+
     fun initView() {
+        rvHasil.layoutManager = lm
+        userAdapter = UserAdapter(activity!!)
+        rvHasil.adapter = userAdapter
+
         realm = Realm.getDefaultInstance()
+        getAllUser()
     }
 
     fun action() {
@@ -57,12 +67,24 @@ class HomeFragment : Fragment() {
 
         btn_add1.setOnClickListener {
             realm.beginTransaction()
+            var count = 0
+
+            realm.where(User::class.java).findAll().let {
+                for (i in it) {
+                    count++
+                }
+            }
+
             try {
                 var user = realm.createObject(User::class.java)
+                user.setId(count+1)
                 user.setNama(et_nama.text.toString())
                 user.setEmail(et_email.text.toString())
 
-                tv_result.text = user.getNama() + "" + user.getEmail()
+//                tv_result.text = user.getId().toString() + " " + user.getNama() + "" + user.getEmail()
+                getAllUser()
+                et_nama.setText("")
+                et_email.setText("")
 
                 realm.commitTransaction()
             } catch (e: RealmException) {
@@ -71,6 +93,11 @@ class HomeFragment : Fragment() {
         }
     }
 
+    fun getAllUser() {
+        realm.where(User::class.java).findAll().let {
+            userAdapter.setUser(it)
+        }
+    }
 }
 
 
