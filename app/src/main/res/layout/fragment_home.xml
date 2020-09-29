@@ -18,6 +18,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:text="Id" />
+
+        <EditText
+            android:id="@+id/et_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="Nama" />
 
         <EditText
@@ -38,12 +50,32 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp" />
 
-        <Button
-            android:id="@+id/btn_add1"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="add" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_add1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="add" />
+
+            <Button
+                android:id="@+id/btn_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="update" />
+
+            <Button
+                android:id="@+id/btn_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="delete" />
+
+        </LinearLayout>
 
 <!--        <TextView-->
 <!--            android:id="@+id/tv_result"-->
@@ -57,23 +89,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_above="@id/btn_ad"
         android:layout_below="@+id/LLayout"
         android:layout_marginBottom="10dp"
         android:padding="10dp" />
 
-    <Button
-        android:id="@+id/btn_ad"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/btn_toast"
-        android:text="alert dialog" />
+        android:orientation="horizontal"
+        android:layout_alignBottom="@id/rvHasil">
 
-    <Button
-        android:id="@+id/btn_toast"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="toast"/>
+        <Button
+            android:id="@+id/btn_ad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="alert dialog" />
+
+        <Button
+            android:id="@+id/btn_toast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="toast"/>
+
+
+    </LinearLayout>
 
 </RelativeLayout>

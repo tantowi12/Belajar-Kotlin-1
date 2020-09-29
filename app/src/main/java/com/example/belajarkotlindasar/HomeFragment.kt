@@ -14,6 +14,7 @@ import com.example.belajarkotlindasar.adapter.UserAdapter
 import com.example.belajarkotlindasar.model.realm.User
 import io.realm.Realm
 import io.realm.exceptions.RealmException
+import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
@@ -90,6 +91,24 @@ class HomeFragment : Fragment() {
             } catch (e: RealmException) {
                 Toast.makeText(activity, e.message, Toast.LENGTH_LONG).show()
             }
+        }
+
+        btn_update.setOnClickListener {
+            realm.beginTransaction()
+            realm.where(User::class.java).equalTo("id", et_id.text.toString().toInt()).findFirst().let {
+                it!!.setNama(et_nama.text.toString())
+                it!!.setEmail(et_email.text.toString())
+            }
+            realm.commitTransaction()
+        }
+
+        btn_delete.setOnClickListener {
+            realm.beginTransaction()
+            realm.where(User::class.java).equalTo("id", et_id.text.toString().toInt()).findFirst().let {
+                it!!.deleteFromRealm()
+                getAllUser()
+            }
+            realm.commitTransaction()
         }
     }
 
